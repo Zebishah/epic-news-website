@@ -13,8 +13,9 @@ const News = (props) => {
 
   const update_content = async () => {
     let apiKey = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=22b4b7021898431e9cdcfd7dbbff9474&pageSize=5`;
+    const proxyUrl = `https://cors-anywhere.herokuapp.com/${apiKey}`;
     setLoading(true);
-    let data = await fetch(apiKey);
+    let data = await fetch(proxyUrl);
     let parsedData = await data.json();
     console.log(parsedData.articles);
     setArticle(parsedData.articles);
@@ -27,8 +28,9 @@ const News = (props) => {
   const fetchMoreData = async () => {
     setPage(page + 1);
     let apiKey = `https://newsapi.org/v2/top-headlines?country=${props.country}&category=${props.category}&apiKey=22b4b7021898431e9cdcfd7dbbff9474&page=${page}&pageSize=${props.pageSize}`;
+    const proxyUrl = `https://cors-anywhere.herokuapp.com/${apiKey}`;
     setLoading(true);
-    let data = await fetch(apiKey);
+    let data = await fetch(proxyUrl);
     let parsedData = await data.json();
     setArticle(articles.concat(parsedData.articles));
     set_TotalResults(parsedData.totalResults);
